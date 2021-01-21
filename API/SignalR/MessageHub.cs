@@ -44,7 +44,7 @@ namespace API.SignalR
             var username = Context.User.GetUsername();
 
             if (username == createMessageDto.RecipientUsername.ToLower())
-                throw new HubException("You cannot send Messages to yoursself");
+                throw new HubException("You cannot send Messages to yourself");
 
             var sender = await _userRepository.GetUserByUsernameAsync(username);
             var recipient = await _userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
