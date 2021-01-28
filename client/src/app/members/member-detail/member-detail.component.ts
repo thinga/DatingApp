@@ -1,5 +1,7 @@
+
 import { OnDestroy, ViewChild } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAction, NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
@@ -17,7 +19,7 @@ import { PresenceService } from 'src/app/_services/presence.service';
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.css']
 })
-export class MemberDetailComponent implements OnInit, OnDestroy {
+export class MemberDetailComponent implements OnInit, OnDestroy{
   @ViewChild('memberTabs', {static: true}) memberTabs: TabsetComponent;
   member: Member;
   galleryOptions: NgxGalleryOptions[];
@@ -28,13 +30,17 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   constructor(public presence: PresenceService, private route: ActivatedRoute,
            private messageService: MessageService, private accountService: AccountService) {
-                this.accountService.currentUsers$.pipe(take(1)).subscribe(user => this.user = user)
+               this.accountService.currentUsers$.pipe(take(1)).subscribe(user => this.user = user);
                }
+ 
 
-
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.member = data.member;
+    })
+
+    this.route.queryParams.subscribe(params => {
+      params.tab ? this.selecTab(params.tab) : this.selecTab(0);
     })
 
     this.galleryOptions = [
@@ -48,6 +54,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
       }
     ]
+
+    this.galleryImages = this.getImages();
 
   }
 

@@ -28,7 +28,8 @@ export class MessageService {
          .withAutomaticReconnect()
          .build()
 
-    this.hubConnection.start().catch(error => console.log(error)); 
+    this.hubConnection.start().catch(error => console.log(error));
+                        
 
     this.hubConnection.on('ReceiveMessageThread', messages => {
       this.messageThreadSource.next(messages);
@@ -36,10 +37,9 @@ export class MessageService {
   }
 
   stopHubConnection() {
-    if(this.hubConnection){
+    if (this.hubConnection){
       this.hubConnection.stop();
-    }
-    
+    } 
   }
 
   getMessages(pageNumber, pageSize, container) {
