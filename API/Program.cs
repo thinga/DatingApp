@@ -1,23 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Data;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace API
-{
-    public class Program
-    {
-        public static async Task Main(string[] args)
-        {
-           var host = CreateHostBuilder(args).Build();
-           using var scope = host.Services.CreateScope();
+// add services to the container
+
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddControllers();
+builder.Services.AddCors();
+builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddSignalR();
+
+// Configure the HTTP request pipeline
+
+var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseHttpsRedirection();
+
+app.UseCors(x => x.AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("https://localhost:4200"));
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.MapControllers();
+
+
+     
+           using var scope = app.Services.CreateScope();
            var services = scope.ServiceProvider;
 
            try
@@ -32,15 +46,4 @@ namespace API
                var logger = services.GetRequiredService<ILogger<Program>>();
                logger.LogError(ex, "An error occurred during migration");
            }
-           await host.RunAsync();
-
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+           await app.RunAsync();
