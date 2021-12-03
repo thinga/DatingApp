@@ -13,8 +13,8 @@ namespace API.Controllers
             _messageRepository = messageRepository;
             _userRepository = userRepository;
         }
-        
-          [HttpPost]
+
+        [HttpPost]
         public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageDto createMessageDto)
         {
             var username = User.GetUsername();
@@ -41,22 +41,32 @@ namespace API.Controllers
 
             return BadRequest("Failed to send message");
         }
-        
+
         [HttpGet]
 
         public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery]
          MessageParams messageParams)
         {
-           messageParams.Username = User.GetUsername();
+            messageParams.Username = User.GetUsername();
 
-           var messages = await _messageRepository.GetMessagesForUser(messageParams);
+            var messages = await _messageRepository.GetMessagesForUser(messageParams);
 
-           Response.AddPaginationHeader(messages.CurrentPage, messages.PageSize,
-                        messages.TotalCount, messages.TotalPages);
+            Response.AddPaginationHeader(messages.CurrentPage, messages.PageSize,
+                         messages.TotalCount, messages.TotalPages);
 
-            return messages;            
+            return messages;
         }
 
+
+        [HttpGet("thread/{username}")]
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
+        {
+            var currentUsername = User.GetUsername();
+
+            return Ok(await _messageRepository.GetMessageThread(currentUsername, username));
+        }
     }
+
 }
+
 
