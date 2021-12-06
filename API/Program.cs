@@ -1,3 +1,5 @@
+using API.SignalR;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // add services to the container
@@ -25,7 +27,10 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapControllers();
-
+app.UseEndpoints(endpoinds => 
+{
+endpoinds.MapHub<PresenceHub>("hubs/presence");
+});
 
      
            using var scope = app.Services.CreateScope();
