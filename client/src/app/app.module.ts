@@ -35,6 +35,7 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { UserManagementComponent } from './admin/user-management/user-management
     MemberMessagesComponent,
     AdminPanelComponent,
     HasRoleDirective,
-    UserManagementComponent
+    UserManagementComponent,
+    RolesModalComponent
   ],
   imports: [
     BrowserModule,
