@@ -31,6 +31,7 @@ namespace API.Extensions
                              ValidateIssuer = false,
                              ValidateAudience = false,
                          };
+                         
                           options.Events = new JwtBearerEvents
                          {
 

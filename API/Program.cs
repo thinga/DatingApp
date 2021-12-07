@@ -18,7 +18,10 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200"));
+app.UseCors(x => x.AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials()
+                  .WithOrigins("http://localhost:4200"));
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -27,10 +30,9 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapControllers();
-app.UseEndpoints(endpoinds => 
-{
-endpoinds.MapHub<PresenceHub>("hubs/presence");
-});
+
+app.MapHub<PresenceHub>("hubs/presence");
+
 
      
            using var scope = app.Services.CreateScope();
