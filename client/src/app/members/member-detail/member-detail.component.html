@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="col-8">
-        <tabset class="member-tabset">
+        <tabset class="member-tabset" #memberTabs>
             <tab heading='About {{member.knownAs}}' (selectTab)="onTabActivated($event)">
                 <h4>Description</h4>
                 <p>{{member.introduction}}</p>
