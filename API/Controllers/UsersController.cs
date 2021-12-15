@@ -50,6 +50,8 @@ namespace API.Controllers
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
             var currentUsername = User.GetUsername();
+
+
             return await _unitOfWork.UserRepository.GetMemberAsync(username, isCurrentUser: currentUsername == username);
 
         }
@@ -81,14 +83,7 @@ namespace API.Controllers
                 Url = result.SecureUrl.AbsoluteUri,
                 PublicId = result.PublicId
             };
-
-            if (user.Photos.Count == 0)
-            {
-                photo.IsMain = true;
-            }
-
-            user.Photos.Add(photo);
-
+            //remove the logic hier when adding a photo to automatically set a photo to main if they do net have a main photo(no unapproved photos should be a users main photo)
             if (await _unitOfWork.Complete())
             {
                 //return _mapper.Map<PhotoDto>(photo);
