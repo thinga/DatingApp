@@ -65,11 +65,18 @@ namespace API.Controllers
 
         [Authorize(Policy = "ModeratePhotoRole")]
         [HttpPost("approve-photo/{photoId}")]
-
         public async Task<ActionResult> ApprovePhoto(int photoId)
         {
+            // APPROVE PHOTO to check to see if the user has any photos that are set to main, if not then set the photo to main when approving.
             var photo = await _unitOfWork.PhotoRepository.GetPhotoById(photoId);
+
+            if (photo == null) return NotFound("Could not find photo");
             photo.IsApproved = true;
+
+            var user = await _unitOfWork.UserRepository.GetUserByPhotoId(photoId);
+
+            if (!user.Photos.Any(x => x.IsMain)) photo.IsMain = true;
+
             await _unitOfWork.Complete();
             return Ok();
         }
