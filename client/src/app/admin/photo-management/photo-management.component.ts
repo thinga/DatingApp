@@ -13,24 +13,25 @@ export class PhotoManagementComponent implements OnInit {
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
+    this.getPhotosForApproval();
   }
 
   getPhotosForApproval() {
     this.adminService.getPhotosForApproval().subscribe(photos => {
       this.photos = photos;
-    })
+    });
   }
 
   approvePhoto(photoId) {
-    this.adminService.approvePhto(photoId).subscribe(() => {
+    this.adminService.approvePhoto(photoId).subscribe(() => {
       this.photos.splice(this.photos.findIndex(p => p.id === photoId), 1);
-    })
+    });
   }
 
   rejectPhoto(photoId) {
     this.adminService.rejectPhoto(photoId).subscribe(() => {
       this.photos.splice(this.photos.findIndex(p => p.id === photoId), 1);
-    })
+    });
   }
 
 }

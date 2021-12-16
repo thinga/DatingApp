@@ -15,7 +15,7 @@ namespace API.Data
                   .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<PhotoForApprovalDto>> GetUnApprovedPhotos()
+        public async Task<IEnumerable<PhotoForApprovalDto>> GetUnapprovedPhotos()
         {
             return await _context.Photos
                    .IgnoreQueryFilters()

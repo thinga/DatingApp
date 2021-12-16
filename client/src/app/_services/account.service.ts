@@ -17,7 +17,7 @@ export class AccountService {
 
   constructor(private http: HttpClient, private presence: PresenceService) { }
 
-  // tslint:disable-next-line: typedef
+
   login(model: any){
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
@@ -30,11 +30,11 @@ export class AccountService {
     );
   }
 
-  // tslint:disable-next-line: typedef
+
   register(model: any){
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
-        if (user) {    
+        if (user) {
           this.setCurrentUser(user);
           this.presence.createHubConnection(user);
         }
@@ -42,7 +42,7 @@ export class AccountService {
     );
   }
 
-  // tslint:disable-next-line: typedef
+
   setCurrentUser(user: User){
     user.roles = [];
     const roles = this.getDecodedToken(user.token).role;
@@ -52,15 +52,13 @@ export class AccountService {
     this.currentUserSource.next(user);
   }
 
-  // tslint:disable-next-line: typedef
+
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.presence.stopHubConnection();
   }
-  
   getDecodedToken(token){
     return JSON.parse(atob(token.split('.')[1]));
 }
-
 }

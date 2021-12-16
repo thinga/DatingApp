@@ -38,11 +38,14 @@ namespace API.Controllers
         {
             var gender = await _unitOfWork.UserRepository.GetUserGender(User.GetUsername());
             userParams.CurrentUsername = User.GetUsername();
+
             if (string.IsNullOrEmpty(userParams.Gender))
                 userParams.Gender = gender== "male" ? "female" : "male";
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
+
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
             return Ok(users);
 
         }
@@ -51,10 +54,10 @@ namespace API.Controllers
         {
             var currentUsername = User.GetUsername();
 
-
             return await _unitOfWork.UserRepository.GetMemberAsync(username, isCurrentUser: currentUsername == username);
 
         }
+
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
@@ -84,6 +87,8 @@ namespace API.Controllers
                 PublicId = result.PublicId
             };
             //remove the logic hier when adding a photo to automatically set a photo to main if they do net have a main photo(no unapproved photos should be a users main photo)
+            user.Photos.Add(photo);
+
             if (await _unitOfWork.Complete())
             {
                 //return _mapper.Map<PhotoDto>(photo);
@@ -92,6 +97,7 @@ namespace API.Controllers
             }
             return BadRequest("Problem adding photo");
         }
+
         [HttpPut("set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int photoId)
         {
@@ -110,6 +116,7 @@ namespace API.Controllers
 
             return BadRequest("Failed to set main photo");
         }
+        
         [HttpDelete("delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(int photoId)
         {

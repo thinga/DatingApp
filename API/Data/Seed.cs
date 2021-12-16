@@ -38,7 +38,7 @@ namespace API.Data
                 await userManager.AddToRoleAsync(user, "Member");
             }
 
-              var admin = new AppUser
+            var admin = new AppUser
             {
                 UserName = "admin"
             };

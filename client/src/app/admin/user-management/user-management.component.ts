@@ -13,7 +13,7 @@ export class UserManagementComponent implements OnInit {
   users: Partial<User[]>;
   bsModalRef: BsModalRef;
 
-  constructor(private adminService:AdminService, private modalService: BsModalService) { }
+  constructor(private adminService: AdminService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.getUsersWithRoles();
@@ -22,28 +22,27 @@ export class UserManagementComponent implements OnInit {
   getUsersWithRoles() {
     this.adminService.getUsersWithRoles().subscribe(users => {
       this.users = users;
-    })
+    });
   }
 
   openRolesModal(user: User) {
-    const config= {
+    const config = {
       class: 'modal-dialog-centered',
       initialState: {
-        user, 
-        roles: this.getRolesArray(user)
+        user, roles: this.getRolesArray(user)
       }
    };
-   this.bsModalRef = this.modalService.show(RolesModalComponent, config);
-   this.bsModalRef.content.updateSelectedRoles.subscribe(values => {
+    this.bsModalRef = this.modalService.show(RolesModalComponent, config);
+    this.bsModalRef.content.updateSelectedRoles.subscribe(values => {
      const rolesToUpdate = {
        roles: [...values.filter(el => el.checked === true).map(el => el.name)]
      };
      if (rolesToUpdate) {
        this.adminService.updateUserRoles(user.username, rolesToUpdate.roles).subscribe(() => {
-         user.roles = [...rolesToUpdate.roles]
-       })
+         user.roles = [...rolesToUpdate.roles];
+       });
      }
-   })
+   });
 
  }
 
@@ -51,9 +50,9 @@ export class UserManagementComponent implements OnInit {
   const roles = [];
   const userRoles = user.roles;
   const availableRoles: any[] = [
-    {name: 'Admin', value:'Admin'},
-    {name: 'Moderator', value:'Moderator'},
-    {name: 'Member', value:'Member'},
+    {name: 'Admin', value: 'Admin'},
+    {name: 'Moderator', value: 'Moderator'},
+    {name: 'Member', value: 'Member'},
 
   ];
 
@@ -71,7 +70,7 @@ export class UserManagementComponent implements OnInit {
       role.checked = false;
       roles.push(role);
     }
-  })
+  });
   return roles;
 }
 

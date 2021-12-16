@@ -1,9 +1,16 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using API.Helpers;
+using Microsoft.AspNetCore.Mvc;
+
 namespace API.SignalR
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     public class PresenceTracker
     {
         private static readonly Dictionary<string, List<string>> OnlineUsers =
-        new Dictionary<string, List<string>>();
+            new Dictionary<string, List<string>>();
 
         public Task<bool> UserConnected(string username, string connectionId)
         {
@@ -20,6 +27,7 @@ namespace API.SignalR
                     isOnline = true;
                 }
             }
+
             return Task.FromResult(isOnline);
         }
 
@@ -52,16 +60,15 @@ namespace API.SignalR
             return Task.FromResult(onlineUsers);
         }
 
-         public Task<List<string>> GetConnectionsForUser(string username)
-         {
-             List<string> connectionIds;
-             lock(OnlineUsers)
-             {
-                 connectionIds = OnlineUsers.GetValueOrDefault(username);
-             }
+        public Task<List<string>> GetConnectionsForUser(string username)
+        {
+            List<string> connectionIds;
+            lock (OnlineUsers)
+            {
+                connectionIds = OnlineUsers.GetValueOrDefault(username);
+            }
 
-             return Task.FromResult(connectionIds);
-         }
-
+            return Task.FromResult(connectionIds);
+        }
     }
 }

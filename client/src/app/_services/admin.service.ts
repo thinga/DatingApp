@@ -24,7 +24,7 @@ export class AdminService {
     return this.http.get<Photo[]>(this.baseUrl + 'admin/photos-to-moderate');
   }
 
-  approvePhto(photoId : number) {
+  approvePhoto(photoId: number) {
     return this.http.post(this.baseUrl + 'admin/approve-photo/' + photoId, {});
   }
 
