@@ -6,6 +6,9 @@
           <ul class="navbar-nav me-auto">
             <ng-container *ngIf="accountService.currentUsers$| async">
               <li class="nav-item">
+                <a class="nav-link" routerLink="/products" routerLinkActive='active' >Shop </a>
+              </li> 
+              <li class="nav-item">
                 <a class="nav-link" routerLink="/members" routerLinkActive='active' >Matches </a>
               </li> 
                
