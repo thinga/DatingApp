@@ -1,4 +1,5 @@
 using API.SignalR;
+using Infrastructure.Interface;
 using Infrastructure.Interfaces;
 using Infrastructure.ProductData;
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<StoreContext>(options =>
               options.UseSqlite(builder.Configuration.GetConnectionString("ProductConnection"));
           });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
 builder.Services.AddSignalR();
 
 // Configure the HTTP request pipeline
