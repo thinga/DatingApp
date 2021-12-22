@@ -3,6 +3,7 @@ using Infrastructure.Interface;
 using Infrastructure.Interfaces;
 using Infrastructure.ProductData;
 using Infrastructure.ProductEntities;
+using Infrastructure.Specifications;
 
 namespace API.Controllers
 {
@@ -26,7 +27,9 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
+            var spec = new ProductsWithTypesAndBrandsSpecification();
             var products = await _productsRepo.ListAllAsync();
+            
             return Ok(products);
         }
 
