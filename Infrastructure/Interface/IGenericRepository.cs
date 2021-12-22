@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Infrastructure.ProductEntities;
+using Infrastructure.Specifications;
 
 namespace Infrastructure.Interface
 {
@@ -8,6 +9,7 @@ namespace Infrastructure.Interface
     {
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> ListAllAsync();
-
+        Task<T> GetEntityWithSpec(ISpecification<T> spec);
+        Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
     }
 }
