@@ -42,8 +42,8 @@ namespace API.Controllers
             var product = await _productsRepo.GetEntityWithSpec(spec);
 
             return _mapper.Map<Product, ProductToReturnDto>(product);
-
         }
+        
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
