@@ -39,6 +39,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { ShopComponent } from './shop/shop.component';
+import { ProductItemComponent } from './shop/product-item/product-item.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ShopComponent } from './shop/shop.component';
     RolesModalComponent,
     ConfirmDialogComponent,
     PhotoManagementComponent,
-    ShopComponent
+    ShopComponent,
+    ProductItemComponent
   ],
   imports: [
     BrowserModule,
