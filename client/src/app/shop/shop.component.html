@@ -51,6 +51,8 @@
                 <pagination  
                     [boundaryLinks]="true"
                     [totalItems]="this.totalCount"
+                    (pageChanged)="onPageChaged($event)"
+                    [itemsPerPage]="this.shopParams.pageSize"
                      previousText="&lsaquo;"
                      nextText="&rsaquo;"
                      firstText="&laquo;"
