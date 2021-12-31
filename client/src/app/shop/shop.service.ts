@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { IBrand } from '../_models/brand';
 import { IProductPagination } from '../_models/ProductPagination';
+import { ShopParams } from '../_models/shopParams';
 import { IType } from '../_models/type';
 
 @Injectable({
@@ -13,21 +14,20 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(brandId?: number, typeId?: number, sort?: string)  {
+  getProducts(shopParams: ShopParams)  {
     let params = new HttpParams();
 
-    if (brandId) {
-    params = params.append('brandId', brandId.toString());
+    if (shopParams.brandId) {
+    params = params.append('brandId', shopParams.brandId.toString());
     }
 
-    if (typeId) {
-    params = params.append('typeId', typeId.toString());
+    if (shopParams.typeId) {
+    params = params.append('typeId',shopParams.typeId.toString());
     }
 
-    if (sort) {
-      params = params.append('sort', sort);
+    if (shopParams.sort) {
+      params = params.append('sort', shopParams.sort);
       }
-
 
     return this.http.get<IProductPagination>(this.baseUrl + 'products', {observe: 'response', params})
     .pipe(
