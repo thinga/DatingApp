@@ -17,5 +17,10 @@
       "es2018",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "stricTemplates": true,
+    "stricDomEventTypes": false,
+    "enableI18nLegacyMessageIdFormat": false
   }
 }
