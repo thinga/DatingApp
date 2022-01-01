@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IBrand } from '../_models/brand';
 import { IProduct } from '../_models/product';
-import { IProductPagination } from '../_models/ProductPagination';
 import { ShopParams } from '../_models/shopParams';
 import { IType } from '../_models/type';
 import { ShopService } from './shop.service';
@@ -13,6 +11,7 @@ import { ShopService } from './shop.service';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
+
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
@@ -79,6 +78,4 @@ export class ShopComponent implements OnInit {
     this.getProducts();
   }
 }
-
-
 

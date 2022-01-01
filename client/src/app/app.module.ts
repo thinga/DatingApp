@@ -38,8 +38,9 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
-import { ShopComponent } from './shop/shop.component';
-import { ProductItemComponent } from './shop/product-item/product-item.component';
+import { ShopModule } from './shop/shop.module';
+
+
 
 @NgModule({
   declarations: [
@@ -65,9 +66,7 @@ import { ProductItemComponent } from './shop/product-item/product-item.component
     UserManagementComponent,
     RolesModalComponent,
     ConfirmDialogComponent,
-    PhotoManagementComponent,
-    ShopComponent,
-    ProductItemComponent
+    PhotoManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +76,8 @@ import { ProductItemComponent } from './shop/product-item/product-item.component
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ShopModule
 
   ],
   providers: [
