@@ -11,7 +11,6 @@ registerMode = false;
   constructor() { }
 
   ngOnInit(): void {
-  
   }
 
   registerToggle(){
