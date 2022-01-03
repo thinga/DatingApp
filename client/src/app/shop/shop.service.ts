@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { IBrand } from '../_models/brand';
+import { IProduct } from '../_models/product';
 import { IProductPagination } from '../_models/ProductPagination';
 import { ShopParams } from '../_models/shopParams';
 import { IType } from '../_models/type';
@@ -39,6 +40,10 @@ export class ShopService {
     return response.body;
     })
     );
+    }
+
+    getProduct(id: number) {
+      return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
     }
 
 
