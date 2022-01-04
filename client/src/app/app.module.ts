@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 
 import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './core/nav/nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './home/home.component';
@@ -39,13 +39,13 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { ShopModule } from './shop/shop.module';
+import { CoreModule } from './core/core.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
     HomeComponent,
     RegisterComponent,
     MemberListComponent,
@@ -77,7 +77,8 @@ import { ShopModule } from './shop/shop.module';
     ReactiveFormsModule,
     SharedModule,
     NgxSpinnerModule,
-    ShopModule
+    ShopModule,
+    CoreModule
 
   ],
   providers: [

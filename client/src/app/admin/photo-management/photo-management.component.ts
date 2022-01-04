@@ -33,5 +33,4 @@ export class PhotoManagementComponent implements OnInit {
       this.photos.splice(this.photos.findIndex(p => p.id === photoId), 1);
     });
   }
-
 }
