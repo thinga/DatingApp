@@ -20,13 +20,13 @@ import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, data: {breadcrumb: 'Home'}},
   {
     path: '',
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      {path: 'products', component: ShopComponent},
+      {path: 'products', component: ShopComponent, data: {breadcrumb: 'Shop'}},
       {path: 'shop/:id', component: ProductDetailsComponent},
       {path: 'members', component: MemberListComponent},
       {path: 'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver}},

@@ -4,6 +4,7 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
 import { SharedModule } from '../_modules/shared.module';
 import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 
 
@@ -14,7 +15,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    BreadcrumbModule,
   ],
   exports: [SectionHeaderComponent, NavComponent]
 })
