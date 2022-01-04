@@ -26,8 +26,6 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      {path: 'products', component: ShopComponent, data: {breadcrumb: 'Shop'}},
-      {path: 'shop/:id', component: ProductDetailsComponent},
       {path: 'members', component: MemberListComponent},
       {path: 'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver}},
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
@@ -36,6 +34,8 @@ const routes: Routes = [
       {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
     ]
   },
+  {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule),
+  data: { breadcrumb: 'Shop' }},
   {path: 'errors', component: TestErrorsComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
