@@ -4,6 +4,7 @@ using API.Interfaces;
 using API.Services;
 using API.SignalR;
 using AutoMapper;
+using Infrastructure.Interface;
 using Infrastructure.ProductData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,9 +30,10 @@ namespace API.Extensions
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
 
-          
-
+            services.AddScoped<IBasketRepository, BasketRepository>();
             return services;
+
+            
         }
     }
 }
