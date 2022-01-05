@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { BasketService } from './basket/basket.service';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
@@ -10,12 +11,14 @@ import { PresenceService } from './_services/presence.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'The Dating app';
+  title = 'Shop online';
   users: any;
 
-  constructor(private accountService: AccountService, private presence: PresenceService){}
+  constructor(private accountService: AccountService, private presence: PresenceService,
+              private basketService: BasketService){}
   ngOnInit(){
     this.setCurrentUser();
+    this.getBasketId();
   }
 
   setCurrentUser() {
@@ -25,8 +28,17 @@ export class AppComponent implements OnInit{
       this.presence.createHubConnection(user);
 
     }
-   
   }
-
+  getBasketId() {
+    const basketId = localStorage.getItem('basket_id');
+    if (basketId) {
+    this.basketService.getBasket(basketId).subscribe(() => {
+      console.log('initialised basket');
+    }, error => {
+      console.log(error);
+    }
+    );
   }
+}
+}
 

@@ -21,6 +21,7 @@ export class BasketService {
     .pipe(
       map((basket: IBasket) => {
         this.basketSource.next(basket);
+        console.log(this.getCurrentBasketValue());
       })
     );
   }
@@ -61,7 +62,7 @@ export class BasketService {
     return basket;
   }
 
- private  mapProductItemToBasketItem(item: IProduct, quantity: number): IBasketItem {
+ private mapProductItemToBasketItem(item: IProduct, quantity: number): IBasketItem {
     return {
       id: item.id,
       productName: item.name,
