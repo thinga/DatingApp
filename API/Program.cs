@@ -3,6 +3,7 @@ using API.SignalR;
 using Infrastructure.Interface;
 using Infrastructure.Interfaces;
 using Infrastructure.ProductData;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,12 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 builder.Services.AddSignalR();
+builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
+{
+    var configuration = ConfigurationOptions.Parse(builder.Configuration
+        .GetConnectionString("Redis"), true);
+    return ConnectionMultiplexer.Connect(configuration);
+});
 
 // Configure the HTTP request pipeline
 

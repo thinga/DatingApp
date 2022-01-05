@@ -7,7 +7,8 @@ import { AbfrageRegistenComponent } from '../register/abfrage-registen/abfrage-r
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent,
+  AbfrageRegistenComponent],
   imports: [
     CommonModule,
     SharedModule

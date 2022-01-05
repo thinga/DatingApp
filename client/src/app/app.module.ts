@@ -49,7 +49,6 @@ import { HomeModule } from './home/home.module';
   declarations: [
     AppComponent,
     RegisterComponent,
-    AbfrageRegistenComponent,
     MemberListComponent,
     MemberDetailComponent,
     ListsComponent,
