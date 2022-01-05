@@ -7,7 +7,6 @@ const routes: Routes = [
   {path: '', component: BasketComponent}
 ];
 
-
 @NgModule({
   declarations: [],
   imports: [
