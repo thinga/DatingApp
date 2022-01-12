@@ -40,7 +40,6 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { ShopModule } from './shop/shop.module';
 import { CoreModule } from './core/core.module';
-import { AbfrageRegistenComponent } from './register/abfrage-registen/abfrage-registen.component';
 import { HomeModule } from './home/home.module';
 
 
@@ -48,8 +47,9 @@ import { HomeModule } from './home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
     MemberListComponent,
+    RegisterComponent,
+    HomeComponent,
     MemberDetailComponent,
     ListsComponent,
     MessagesComponent,
@@ -79,8 +79,7 @@ import { HomeModule } from './home/home.module';
     SharedModule,
     NgxSpinnerModule,
     ShopModule,
-    CoreModule,
-    HomeModule
+    CoreModule
 
   ],
   providers: [
