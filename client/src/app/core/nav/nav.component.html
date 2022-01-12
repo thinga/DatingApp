@@ -41,16 +41,21 @@
 
     <div class="dropdown" *ngIf="(accountService.currentUsers$ | async) as user" dropdown>
       <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}">
-      <a class="dropdown-toggle text-light ms-2" dropdownToggle>Welcome {{user.knownAs || user.username |
+      <a class="dropdown-toggle text-light ms-2" dropdownToggle> Welcome {{user.knownAs || user.username |
         titlecase}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item" routerLink="/member/edit">Edit Profile</a>
+        <a class="dropdown-item d-flex align-items-center py-2" routerLink="/member/edit">
+          <i class="fa fa-user-circle mr-3"></i>  Edit Profile</a>
+
         <a routerLink="/basket" class="dropdown-item d-flex align-items-center py-2">
           <i class="fa fa-shopping-cart mr-3"></i> View Basket
         </a>
+        <a routerLink="/yourShop" class="dropdown-item d-flex align-items-center py-2">
+          <i class="fa fa-shopping-bag mr-3"></i> Your Shop
+        </a>
         <div class="dropdown-divider"></div>
 
-        <a class="dropdown-item" (click)="logout()">Logout</a>
+        <a class="dropdown-item d-flex align-items-center py-2" (click)="logout()">Logout</a>
       </div>
 
     </div>
