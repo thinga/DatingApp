@@ -40,7 +40,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { ShopModule } from './shop/shop.module';
 import { CoreModule } from './core/core.module';
-import { HomeModule } from './home/home.module';
+
 
 
 

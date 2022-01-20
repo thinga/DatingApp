@@ -1,4 +1,4 @@
-namespace API.DTOs
+namespace Infrastructure.ProductDtos
 {
     public class ProductToReturnDto
     {
@@ -11,6 +11,9 @@ namespace API.DTOs
         public string ProductType { get; set; }
        
         public string ProductBrand { get; set; }
+
+          public string postUsername { get; set; }
+         public string Content { get; set;}
 
     }
 }

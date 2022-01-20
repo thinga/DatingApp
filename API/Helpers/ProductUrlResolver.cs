@@ -1,3 +1,4 @@
+using Infrastructure.ProductDtos;
 using Infrastructure.ProductEntities;
 
 namespace API.Helpers

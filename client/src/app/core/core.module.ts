@@ -5,6 +5,7 @@ import { SharedModule } from '../_modules/shared.module';
 import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbModule } from 'xng-breadcrumb';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,6 +18,7 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
     SharedModule,
     RouterModule,
     BreadcrumbModule,
+    FormsModule,
   ],
   exports: [SectionHeaderComponent, NavComponent]
 })

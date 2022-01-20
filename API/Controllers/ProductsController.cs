@@ -1,6 +1,7 @@
 
 using API.Helpers;
 using Infrastructure.Interface;
+using Infrastructure.ProductDtos;
 using Infrastructure.ProductEntities;
 using Infrastructure.Specifications;
 
