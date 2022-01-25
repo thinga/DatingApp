@@ -3,25 +3,26 @@
   <div class="container">
     <a class="navbar-brand" routerLink='/' routerLinkActive='active'>ShopOnline</a>
     <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive='active'>Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/shop" routerLinkActive='active'>Mặt hàng</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/" routerLinkActive='active'>Đăng ký</a>
+      </li>
       <ng-container *ngIf="accountService.currentUsers$| async">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive='active'>Home</a>
+          <a class="nav-link" routerLink="/members" routerLinkActive='active'>Doanh nghiệp</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/shop" routerLinkActive='active'>Shop </a>
-        </li>
-       
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/members" routerLinkActive='active'>Khách hàng</a>
+          <a class="nav-link" routerLink="/lists" routerLinkActive='active'>Bạn bè</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/lists" routerLinkActive='active'>Đối tác</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/messages" routerLinkActive='active'>Messages</a>
+          <a class="nav-link" routerLink="/messages" routerLinkActive='active'>Tin nhắn</a>
         </li>
         <li *appHasRole='["Admin", "Moderator"]' class="nav-item">
           <a class="nav-link" routerLink="/admin" routerLinkActive='active'>Admin</a>
@@ -34,7 +35,7 @@
       </li>
     </ul>
 
-<div class="d-flex align-items-center">
+<div class="d-flex align-items-center" *ngIf="(accountService.currentUsers$ | async) as user">
       <a routerLink='/basket' class="position-relative">
         <div *ngIf="(basket$ | async) as basket" class="cart-no">{{basket.items.length}}</div>
         <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>

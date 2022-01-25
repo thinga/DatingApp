@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IBasket, IBasketItem } from '../_models/basket';
+import { AccountService } from '../_services/account.service';
 import { BasketService } from './basket.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { BasketService } from './basket.service';
 export class BasketComponent implements OnInit {
   basket$: Observable<IBasket>;
 
-  constructor(private basketService: BasketService) { }
+  constructor(public accountService: AccountService,private basketService: BasketService) { }
 
   ngOnInit(): void {
     this.basket$ = this.basketService.basket$;

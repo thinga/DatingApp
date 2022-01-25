@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Infrastructure.ProductDtos;
 using Infrastructure.ProductEntities;
 
 namespace Infrastructure.Interfaces
@@ -10,5 +11,6 @@ namespace Infrastructure.Interfaces
         Task<IReadOnlyList<Product>> GetProductsAsync();
         Task<IReadOnlyList<ProductBrand>> GetProductsBrandsAsync();
         Task<IReadOnlyList<ProductType>> GetProductTypesAsync();
+        Task<ProductToReturnDto> CreateUpdateProduct(ProductToReturnDto productDto);
     }
 }

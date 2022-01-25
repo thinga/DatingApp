@@ -12,8 +12,5 @@ namespace Infrastructure.ProductDtos
        
         public string ProductBrand { get; set; }
 
-          public string postUsername { get; set; }
-         public string Content { get; set;}
-
     }
 }

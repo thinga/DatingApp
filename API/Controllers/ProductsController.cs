@@ -1,6 +1,8 @@
 
 using API.Helpers;
 using Infrastructure.Interface;
+using Infrastructure.Interfaces;
+using Infrastructure.ProductData;
 using Infrastructure.ProductDtos;
 using Infrastructure.ProductEntities;
 using Infrastructure.Specifications;
@@ -15,11 +17,18 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
+        private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly StoreContext _context;
 
         public ProductsController(IGenericRepository<Product> productsRepo,
         IGenericRepository<ProductBrand> productBrandRepo, IGenericRepository<ProductType> productTypeRepo,
-        IMapper mapper)
+        IMapper mapper, IProductRepository productRepository, IUnitOfWork unitOfWork, StoreContext context)
         {
+            _context = context;
+            _unitOfWork = unitOfWork;
+            _productRepository = productRepository;
+
             _mapper = mapper;
             _productTypeRepo = productTypeRepo;
             _productBrandRepo = productBrandRepo;
@@ -27,11 +36,24 @@ namespace API.Controllers
 
         }
 
+        [HttpPost("add")]
+        public async Task<ActionResult<ProductToReturnDto>> CreatedProduct(ProductToReturnDto newProduct)
+        {
+  
+            var result = await _productRepository.CreateUpdateProduct(newProduct);
+
+            if (result == null) return BadRequest(" the Product did not saved");
+        
+            return Ok(result);
+
+        }
+
+
         [HttpGet]
-        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams )
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
-            var countSpec =new ProductWithFiltersForCountSpecification(productParams);
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
 
             var totalItems = await _productsRepo.CountAsync(countSpec);
 
@@ -45,6 +67,7 @@ namespace API.Controllers
 
         }
 
+
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
@@ -54,7 +77,7 @@ namespace API.Controllers
 
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }
-        
+
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
